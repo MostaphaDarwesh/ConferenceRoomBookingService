@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.mashreq</groupId>
-    <artifactId>Conference-Booking-Service</artifactId>
+    <artifactId>Conference-Room-Booking-Service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Conference-Room-Booking-Service</name>
     <description>Conference-Room-Booking-Service</description>

@@ -7,9 +7,9 @@ import com.mashreq.conference.booking.helper.properties.MaintenanceTimingsConfig
 import com.mashreq.conference.booking.service.ConferenceRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,48 +44,48 @@ public class ConferenceRoomServiceImpl implements ConferenceRoomService {
         return availableRooms;
     }
 
-    public ConferenceRoomConfig.ConferenceRoom getConferenceRoomByName(String roomName) {
-        // Iterate through the configured rooms and find the one with a matching name
-        return conferenceRoomConfig.getRooms().stream()
-                .filter(room -> room.getName().equalsIgnoreCase(roomName))
-                .findFirst()
-                .orElse(null);
-    }
-
     @Override
-    public String bookConferenceRoom(String date, String roomName, String startTime, String endTime, int numberOfPeople) {
+    public String bookConferenceRoom(String startTime, String endTime, int numberOfPeople) {
         // Check if the booking time is within maintenance timings
-        LocalDate parsedDate = LocalDate.parse(date);
         if (isDuringMaintenance(LocalTime.parse(startTime)) || isDuringMaintenance(LocalTime.parse(endTime))) {
             return "Booking cannot be done during maintenance time.";
-        }
-        // Find the conference room by name
-        ConferenceRoomConfig.ConferenceRoom conferenceRoom = getConferenceRoomByName(roomName);
-
-        // Check if the room exists
-        if (conferenceRoom == null) {
-            return "Invalid room name.";
-        }
-        // Check if the room has the capacity for the requested number of people
-        if (numberOfPeople <= 0 || numberOfPeople > conferenceRoom.getCapacity()) {
-            return "Invalid number of people or room capacity exceeded.";
-        }
-        // Check if the booking time is in intervals of 15 minutes
-        if (!isValidBookingInterval(startTime, endTime)) {
-            return "Booking should be done only in intervals of 15 minutes.";
         }
         // Check if the start time is before the end time
         if (!isValidTimeRange(startTime, endTime)) {
             return "Invalid time range.";
         }
-        // Check if the room is available for the given time range
-        if (!isRoomAvailable(roomName, LocalDate.now(), LocalTime.parse(startTime), LocalTime.parse(endTime))) {
-            return "Room is not available for the specified time range.";
+        // Check for interval of 15 minutes
+        if (!isValidBookingInterval(startTime,endTime)) {
+            return "Booking can only be done in intervals of 15 minutes.";
+        }
+
+        // Fetch the list of rooms sorted by capacity
+        List<ConferenceRoomConfig.ConferenceRoom> sortedRooms = conferenceRoomConfig.getRooms()
+                .stream()
+                .sorted(Comparator.comparingInt(ConferenceRoomConfig.ConferenceRoom::getCapacity))
+                .collect(Collectors.toList());
+
+        // Find the first available room that can accommodate the requested number of people
+        ConferenceRoomConfig.ConferenceRoom selectedRoom = null;
+        for (ConferenceRoomConfig.ConferenceRoom room : sortedRooms) {
+            // Check if the room has the capacity for the requested number of people
+            if (numberOfPeople > 1 && numberOfPeople <= room.getCapacity()) {
+                // Check if the room is available for the given time range
+                if (isRoomAvailable(room.getName(), LocalDate.now(), LocalTime.parse(startTime), LocalTime.parse(endTime))) {
+                    selectedRoom = room;
+                    break;
+                }
+            }
+        }
+        // Check if a suitable room was found
+        if (selectedRoom == null) {
+            return "No available room found for the specified criteria.";
         }
         // Save the booking details to the database
-        BookingEntity booking = new BookingEntity(parsedDate, roomName, LocalTime.parse(startTime), LocalTime.parse(endTime), numberOfPeople);
+        BookingEntity booking = new BookingEntity(LocalDate.now(), selectedRoom.getName(), LocalTime.parse(startTime), LocalTime.parse(endTime), numberOfPeople);
         bookingRepository.save(booking);
-        return "Booking successful!";
+
+        return "Booking successful! Room: " + selectedRoom.getName();
     }
 
     public boolean isValidTimeRange(String startTime, String endTime) {

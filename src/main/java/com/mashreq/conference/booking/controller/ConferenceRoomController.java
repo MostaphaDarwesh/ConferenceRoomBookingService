@@ -19,8 +19,6 @@ public class ConferenceRoomController {
     @PostMapping(value = "/book", consumes = MediaType.APPLICATION_JSON_VALUE)
     public String bookConferenceRoom(@RequestBody BookingRequest bookingRequest) {
         return conferenceRoomService.bookConferenceRoom(
-                bookingRequest.getDate(),
-                bookingRequest.getRoomName(),
                 bookingRequest.getStartTime(),
                 bookingRequest.getEndTime(),
                 bookingRequest.getNumberOfPeople()
