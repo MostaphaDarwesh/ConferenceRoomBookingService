@@ -1,7 +1,6 @@
 package com.mashreq.conference.booking.service.Impl;
 
 import com.mashreq.conference.booking.Repository.BookingRepository;
-import com.mashreq.conference.booking.helper.Entity.BookingEntity;
 import com.mashreq.conference.booking.helper.properties.ConferenceRoomConfig;
 import com.mashreq.conference.booking.helper.properties.MaintenanceTimingsConfig;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,9 +15,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.when;
 
 class ConferenceRoomServiceImplTest {
 
@@ -77,7 +77,6 @@ class ConferenceRoomServiceImplTest {
 
     @Test
     void testBookConferenceRoom_DuringMaintenance() {
-        // Mocking dependencies
         when(maintenanceTimingsConfig.getTimings()).thenReturn(Collections.singletonList(
                 new MaintenanceTimingsConfig.TimeRange("09:00:00", "09:15:00")
         ));
@@ -98,5 +97,4 @@ class ConferenceRoomServiceImplTest {
         String result = conferenceRoomService.bookConferenceRoom( "12:10:00", "13:00:00", 5);
         assertEquals("Booking can only be done in intervals of 15 minutes.", result);
     }
-    // Additional test cases for various scenarios
 }
