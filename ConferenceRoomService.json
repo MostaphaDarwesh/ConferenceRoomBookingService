@@ -18,7 +18,7 @@
               "language": "json"
             }
           },
-          "raw": "{\n  \"date\": \"\",\n  \"roomName\": \"\",\n  \"startTime\": \"\",\n  \"endTime\": \"\",\n  \"numberOfPeople\": 0\n}"
+          "raw": "{\n  \"startTime\": \"\",\n  \"endTime\": \"\",\n  \"numberOfPeople\": 0\n}"
         },
         "url": {
           "path": [
@@ -27,8 +27,8 @@
             "book"
           ],
           "query": [],
-          "host": "{{Conference-Booking-Service}}",
-          "raw": "{{Conference-Booking-Service}}/api/rooms/book"
+          "host": "{{Conference-Room-Booking-Service}}",
+          "raw": "{{Conference-Room-Booking-Service}}/api/rooms/book"
         }
       },
       "response": [
@@ -50,11 +50,11 @@
                   "language": "json"
                 }
               },
-              "raw": "{\n    \"date\": \"\",\n    \"roomName\": \"\",\n    \"startTime\": \"\",\n    \"endTime\": \"\",\n    \"numberOfPeople\": 0\n}"
+              "raw": "{\n    \"startTime\": \"\",\n    \"endTime\": \"\",\n    \"numberOfPeople\": 0\n}"
             },
             "url": {
               "query": [],
-              "host": "{{Conference-Booking-Service}}"
+              "host": "{{Conference-Room-Booking-Service}}"
             }
           },
           "_postman_previewlanguage": "json",
@@ -64,7 +64,7 @@
             {
               "name": "date",
               "key": "date",
-              "value": "Fri, 26 Jan 202416:16:05 GMT",
+              "value": "Fri, 26 Jan 202418:51:40 GMT",
               "description": "The date and time that the message was sent"
             },
             {
@@ -120,8 +120,8 @@
             "available"
           ],
           "query": [],
-          "host": "{{Conference-Booking-Service}}",
-          "raw": "{{Conference-Booking-Service}}/api/rooms/available"
+          "host": "{{Conference-Room-Booking-Service}}",
+          "raw": "{{Conference-Room-Booking-Service}}/api/rooms/available"
         }
       },
       "response": [
@@ -155,8 +155,8 @@
                 "available"
               ],
               "query": [],
-              "host": "{{Conference-Booking-Service}}",
-              "raw": "{{Conference-Booking-Service}}/api/rooms/available"
+              "host": "{{Conference-Room-Booking-Service}}",
+              "raw": "{{Conference-Room-Booking-Service}}/api/rooms/available"
             }
           },
           "_postman_previewlanguage": "json",
@@ -166,7 +166,7 @@
             {
               "name": "date",
               "key": "date",
-              "value": "Fri, 26 Jan 202416:16:05 GMT",
+              "value": "Fri, 26 Jan 202418:51:40 GMT",
               "description": "The date and time that the message was sent"
             },
             {
@@ -195,7 +195,7 @@
   ],
   "info": {
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "name": "ConferenceRoomController-20240126161605",
+    "name": "ConferenceRoomController",
     "description": "ConferenceRoomController"
   }
 }
