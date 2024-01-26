@@ -1,0 +1,201 @@
+{
+  "item": [
+    {
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          },
+          "raw": "{\n  \"date\": \"\",\n  \"roomName\": \"\",\n  \"startTime\": \"\",\n  \"endTime\": \"\",\n  \"numberOfPeople\": 0\n}"
+        },
+        "url": {
+          "path": [
+            "api",
+            "rooms",
+            "book"
+          ],
+          "query": [],
+          "host": "{{Conference-Booking-Service}}",
+          "raw": "{{Conference-Booking-Service}}/api/rooms/book"
+        }
+      },
+      "response": [
+        {
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              },
+              "raw": "{\n    \"date\": \"\",\n    \"roomName\": \"\",\n    \"startTime\": \"\",\n    \"endTime\": \"\",\n    \"numberOfPeople\": 0\n}"
+            },
+            "url": {
+              "query": [],
+              "host": "{{Conference-Booking-Service}}"
+            }
+          },
+          "_postman_previewlanguage": "json",
+          "code": 200,
+          "name": "bookConferenceRoom-Example",
+          "header": [
+            {
+              "name": "date",
+              "key": "date",
+              "value": "Fri, 26 Jan 202416:16:05 GMT",
+              "description": "The date and time that the message was sent"
+            },
+            {
+              "name": "server",
+              "key": "server",
+              "value": "Apache-Coyote/1.1",
+              "description": "A name for the server"
+            },
+            {
+              "name": "transfer-encoding",
+              "key": "transfer-encoding",
+              "value": "chunked",
+              "description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+            },
+            {
+              "name": "content-type",
+              "key": "content-type",
+              "value": "application/json;charset\u003dUTF-8"
+            }
+          ],
+          "body": "\"\""
+        }
+      ],
+      "name": "bookConferenceRoom"
+    },
+    {
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "date",
+            "value": "",
+            "type": "text",
+            "description": ""
+          },
+          {
+            "key": "startTime",
+            "value": "",
+            "type": "text",
+            "description": ""
+          },
+          {
+            "key": "endTime",
+            "value": "",
+            "type": "text",
+            "description": ""
+          }
+        ],
+        "url": {
+          "path": [
+            "api",
+            "rooms",
+            "available"
+          ],
+          "query": [],
+          "host": "{{Conference-Booking-Service}}",
+          "raw": "{{Conference-Booking-Service}}/api/rooms/available"
+        }
+      },
+      "response": [
+        {
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "date",
+                "value": "",
+                "type": "text",
+                "description": ""
+              },
+              {
+                "key": "startTime",
+                "value": "",
+                "type": "text",
+                "description": ""
+              },
+              {
+                "key": "endTime",
+                "value": "",
+                "type": "text",
+                "description": ""
+              }
+            ],
+            "url": {
+              "path": [
+                "api",
+                "rooms",
+                "available"
+              ],
+              "query": [],
+              "host": "{{Conference-Booking-Service}}",
+              "raw": "{{Conference-Booking-Service}}/api/rooms/available"
+            }
+          },
+          "_postman_previewlanguage": "json",
+          "code": 200,
+          "name": "getAvailableRooms-Example",
+          "header": [
+            {
+              "name": "date",
+              "key": "date",
+              "value": "Fri, 26 Jan 202416:16:05 GMT",
+              "description": "The date and time that the message was sent"
+            },
+            {
+              "name": "server",
+              "key": "server",
+              "value": "Apache-Coyote/1.1",
+              "description": "A name for the server"
+            },
+            {
+              "name": "transfer-encoding",
+              "key": "transfer-encoding",
+              "value": "chunked",
+              "description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+            },
+            {
+              "name": "content-type",
+              "key": "content-type",
+              "value": "application/json;charset\u003dUTF-8"
+            }
+          ],
+          "body": "[\n    \"\"\n]"
+        }
+      ],
+      "name": "getAvailableRooms"
+    }
+  ],
+  "info": {
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "name": "ConferenceRoomController-20240126161605",
+    "description": "ConferenceRoomController"
+  }
+}
