@@ -6,7 +6,7 @@ public interface ConferenceRoomService {
 
     List<String> getAvailableRooms(String date, String startTime, String endTime);
 
-    String bookConferenceRoom(String date, String roomName, String startTime, String endTime, int numberOfPeople);
+    String bookConferenceRoom( String startTime, String endTime, int numberOfPeople);
 }
 
 
