@@ -25,10 +25,12 @@ public class BookingEntity {
     private LocalTime endTime;
     @Column(name = "number_Of_People")
     private int numberOfPeople;
+
     public BookingEntity() {
 
     }
-    public BookingEntity(LocalDate date,String room, LocalTime startTime, LocalTime endTime, int numberOfPeople ) {
+
+    public BookingEntity(LocalDate date, String room, LocalTime startTime, LocalTime endTime, int numberOfPeople) {
         this.date = date;
         this.roomName = room;
         this.startTime = LocalTime.from(startTime);

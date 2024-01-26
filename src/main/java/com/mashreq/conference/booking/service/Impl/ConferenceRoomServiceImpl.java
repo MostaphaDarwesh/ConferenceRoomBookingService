@@ -1,4 +1,5 @@
 package com.mashreq.conference.booking.service.Impl;
+
 import com.mashreq.conference.booking.Repository.BookingRepository;
 import com.mashreq.conference.booking.helper.Entity.BookingEntity;
 import com.mashreq.conference.booking.helper.properties.ConferenceRoomConfig;
@@ -6,6 +7,7 @@ import com.mashreq.conference.booking.helper.properties.MaintenanceTimingsConfig
 import com.mashreq.conference.booking.service.ConferenceRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -19,6 +21,7 @@ public class ConferenceRoomServiceImpl implements ConferenceRoomService {
     private MaintenanceTimingsConfig maintenanceTimingsConfig;
     @Autowired
     private ConferenceRoomConfig conferenceRoomConfig;
+
     @Override
     public List<String> getAvailableRooms(String date, String startTime, String endTime) {
         // Parse date, startTime, and endTime strings into LocalDate and LocalTime objects
@@ -40,6 +43,7 @@ public class ConferenceRoomServiceImpl implements ConferenceRoomService {
 
         return availableRooms;
     }
+
     public ConferenceRoomConfig.ConferenceRoom getConferenceRoomByName(String roomName) {
         // Iterate through the configured rooms and find the one with a matching name
         return conferenceRoomConfig.getRooms().stream()
@@ -47,8 +51,9 @@ public class ConferenceRoomServiceImpl implements ConferenceRoomService {
                 .findFirst()
                 .orElse(null);
     }
+
     @Override
-    public String bookConferenceRoom(String date,String roomName, String startTime, String endTime, int numberOfPeople) {
+    public String bookConferenceRoom(String date, String roomName, String startTime, String endTime, int numberOfPeople) {
         // Check if the booking time is within maintenance timings
         LocalDate parsedDate = LocalDate.parse(date);
         if (isDuringMaintenance(LocalTime.parse(startTime)) || isDuringMaintenance(LocalTime.parse(endTime))) {
@@ -74,19 +79,21 @@ public class ConferenceRoomServiceImpl implements ConferenceRoomService {
             return "Invalid time range.";
         }
         // Check if the room is available for the given time range
-        if (!isRoomAvailable(roomName, LocalDate.now(),LocalTime.parse(startTime), LocalTime.parse(endTime))) {
+        if (!isRoomAvailable(roomName, LocalDate.now(), LocalTime.parse(startTime), LocalTime.parse(endTime))) {
             return "Room is not available for the specified time range.";
         }
         // Save the booking details to the database
-        BookingEntity booking = new BookingEntity(parsedDate,roomName, LocalTime.parse(startTime), LocalTime.parse(endTime),numberOfPeople);
+        BookingEntity booking = new BookingEntity(parsedDate, roomName, LocalTime.parse(startTime), LocalTime.parse(endTime), numberOfPeople);
         bookingRepository.save(booking);
         return "Booking successful!";
     }
+
     public boolean isValidTimeRange(String startTime, String endTime) {
         LocalTime startDateTime = LocalTime.parse(startTime);
         LocalTime endDateTime = LocalTime.parse(endTime);
         return startDateTime.isBefore(endDateTime);
     }
+
     public boolean isValidBookingInterval(String startTime, String endTime) {
         LocalTime start = LocalTime.parse(startTime);
         LocalTime end = LocalTime.parse(endTime);

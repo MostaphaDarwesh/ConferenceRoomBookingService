@@ -87,7 +87,7 @@ class ConferenceRoomServiceImplTest {
     @Test
     public void testIsDuringMaintenance() {
 
-                // Mocking maintenance timings
+        // Mocking maintenance timings
         when(maintenanceTimingsConfig.getTimings()).thenReturn(Arrays.asList(
                 new MaintenanceTimingsConfig.TimeRange("09:00:00", "09:15:00"),
                 new MaintenanceTimingsConfig.TimeRange("13:00:00", "13:15:00"),

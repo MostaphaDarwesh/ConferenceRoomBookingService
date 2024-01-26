@@ -26,6 +26,7 @@ public class ConferenceRoomController {
                 bookingRequest.getNumberOfPeople()
         );
     }
+
     @GetMapping("/available")
     public ResponseEntity<List<String>> getAvailableRooms(
             @RequestHeader String date,

@@ -12,6 +12,7 @@ import java.util.List;
 public interface BookingRepository extends JpaRepository<BookingEntity, Long> {
     List<BookingEntity> findByRoomNameAndDateAndEndTimeAfterAndStartTimeBefore(
             String roomName, LocalDate date, LocalTime startTime, LocalTime endTime);
+
     @Query("SELECT b.roomName FROM BookingEntity b " +
             "WHERE b.date = :date " +
             "AND ((b.startTime >= :startTime AND b.startTime < :endTime) " +
