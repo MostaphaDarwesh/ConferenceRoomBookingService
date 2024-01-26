@@ -2,6 +2,12 @@
 
 **ConferenceRoomService.json -- POSTMAN Collection For the APIs**
 
+**Technology Stack**
+1. Java 17 
+2. Spring Boot 3
+3. Maven
+4. In Memory Database H2
+
 **conference room booking REST API for your company’s internal use.**
 
 As of now, there are 4 conference rooms available in the building and all have
